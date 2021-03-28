@@ -1,16 +1,17 @@
 #include <Servo.h>
 
+//Define the pins for which the joystick and servo wires are connected
 const int ledPin = 13;
-const int xPin = A0;                                               
-const int yPin = A1;
+const int xPin = A0; // define X-axis pin
+const int yPin = A1; // define Y-axis pin
 const int switchPin = 2;
 const int servoxPin = 10;
 const int servoyPin = 11; 
 
 int xValue;
 int yValue;
-int X_pos = 10;
-int Y_pos = 30;
+int X_pos = 10; // set home position for servos
+int Y_pos = 30; // set home position for servos
 
 volatile int switchState = 0;
  
@@ -23,10 +24,10 @@ void setup()
   pinMode (yPin, INPUT) ;
   pinMode(ledPin, OUTPUT);
   pinMode(switchPin, INPUT_PULLUP);
-  servox.attach(servoxPin ); 
-  servoy.attach(servoyPin); 
-  servox.write(X_pos);
-  servoy.write(Y_pos);
+  servox.attach(servoxPin); // attaching servo X
+  servoy.attach(servoyPin); // attaching servo Y
+  servox.write(X_pos); // update X_pos with home position as startup
+  servoy.write(Y_pos); // update Y_pos with home position as startup
   attachInterrupt(digitalPinToInterrupt(switchPin), switchISR, CHANGE);
 }
 
